@@ -32,7 +32,7 @@ MAINTAINER zengyu 284141050@qq.com
 RUN docker-php-ext-install -j$(nproc) pdo_mysql
 
 # inotify
-RUN pecl install inotify && DOCKER-PHP-EXT-enable inotify
+RUN pecl install inotify && docker-php-ext-enable inotify
 
 ADD extension /tmp/extension
 
