@@ -1,6 +1,6 @@
 # build:
 #
-# docker build -t lopy-dev/php7.0-cli-swoole1.10 .
+# docker build -t registry.cn-hongkong.aliyuncs.com/lopy-dev/docker-dev-php7.0-cli-swoole1.10 .
 
 # This dockerfile uses the ubuntu image
 # VERSION 2 - EDITION 1
@@ -31,7 +31,7 @@ MAINTAINER zengyu 284141050@qq.com
 # mysql
 RUN docker-php-ext-install -j$(nproc) pdo_mysql
 
-#RUN pecl install inotify && echo "extension=inotify.so" > /usr/local/etc/php/conf.d/inotify.ini
+# inotify
 RUN pecl install inotify && DOCKER-PHP-EXT-enable inotify
 
 ADD extension /tmp/extension
