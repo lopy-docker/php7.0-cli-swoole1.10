@@ -15,17 +15,19 @@ MAINTAINER zengyu 284141050@qq.com
 
 #
 
-# RUN echo "deb http://deb.debian.org/debian jessie main" >/etc/apt/source.list \
-#     && echo "deb http://security.debian.org/debian-security jessie/updates main" >/etc/apt/source.list \
-#     && echo "deb http://deb.debian.org/debian jessie-updates main" >/etc/apt/source.list \
-#     && echo "deb http://mirrors.aliyun.com/debian jessie main non-free contrib" >/etc/apt/source.list \
-#     && echo "deb-src http://mirrors.aliyun.com/debian jessie main non-free contrib" >/etc/apt/source.list \
-#     && echo "deb http://mirrors.aliyun.com/debian jessie-updates main non-free contrib" >/etc/apt/source.list \
-#     && echo "deb-src http://mirrors.aliyun.com/debian jessie-updates main non-free contrib" >/etc/apt/source.list \
-#     && apt-get update \
-#     && apt-get install -y unzip \ 
-#     && apt-get clean && apt-get autoclean \
-#     && ls /var/cache/apt/archives
+RUN echo "deb http://deb.debian.org/debian stretch main" >/etc/apt/sources.list \
+    && echo "deb http://security.debian.org/debian-security stretch/updates main" >>/etc/apt/sources.list \
+    && echo "deb http://deb.debian.org/debian stretch-updates main" >>/etc/apt/sources.list \
+    && echo "deb http://mirrors.aliyun.com/debian stretch main non-free contrib" >>/etc/apt/sources.list \
+    && echo "deb-src http://mirrors.aliyun.com/debian stretch main non-free contrib" >>/etc/apt/sources.list \
+    && echo "deb http://mirrors.aliyun.com/debian stretch-updates main non-free contrib" >>/etc/apt/sources.list \
+    && echo "deb-src http://mirrors.aliyun.com/debian stretch-updates main non-free contrib" >>/etc/apt/sources.list \
+    && apt-get update \
+    && apt-get install -y sudo \ 
+    && apt-get install -y unzip \ 
+    && apt-get install -y unrar \ 
+    && apt-get clean && apt-get autoclean \
+    && ls /var/cache/apt/archives
 
 
 # mysql
@@ -34,6 +36,12 @@ RUN docker-php-ext-install -j$(nproc) pdo_mysql
 # inotify
 RUN pecl install inotify && docker-php-ext-enable inotify
 
+RUN mkdir /var/www \ 
+    && chown -R www-data /var/www \
+    && cd /usr/local/bin \
+    && curl -sS https://getcomposer.org/installer | php \
+    && sudo -u www-data sh composer.phar global require 'composer/composer:dev-master'
+
 ADD extension /tmp/extension
 
 # apcu
@@ -41,6 +49,10 @@ RUN php /tmp/extension/ExtInstaller.php -n apcu
 
 # swoole
 RUN php /tmp/extension/ExtInstaller.php -n swoole
+
+# support zh-cn
+ENV LANG C.UTF-8
+
 
 # Commands when creating a new container
 CMD ["php","-a"]
