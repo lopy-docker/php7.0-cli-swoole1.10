@@ -39,8 +39,9 @@ RUN pecl install inotify && docker-php-ext-enable inotify
 RUN mkdir /var/www \ 
     && chown -R www-data /var/www \
     && cd /usr/local/bin \
-    && curl -sS https://getcomposer.org/installer | php \
-    && sudo -u www-data sh composer.phar global require 'composer/composer:dev-master'
+    && curl -sS https://getcomposer.org/installer | php 
+
+RUN sudo -u www-data sh composer.phar global require 'composer/composer:dev-master'
 
 ADD extension /tmp/extension
 
