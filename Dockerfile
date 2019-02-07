@@ -45,8 +45,8 @@ RUN mkdir /var/www \
     && cd /usr/local/bin \
     && curl -sS https://getcomposer.org/installer | php 
 
-#RUN sudo -u www-data composer.phar global require 'composer/composer:dev-master'
-RUN sudo -u www-data composer.phar global require 'codeception/codeception'
+RUN composer.phar global require 'composer/composer:dev-master'
+RUN composer.phar global require 'codeception/codeception'
 
 ADD extension /tmp/extension
 
