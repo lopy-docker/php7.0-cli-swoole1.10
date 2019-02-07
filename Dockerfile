@@ -56,8 +56,10 @@ RUN php /tmp/extension/ExtInstaller.php -n apcu
 # swoole
 RUN php /tmp/extension/ExtInstaller.php -n swoole
 
-RUN echo "export PATH=\$PATH:/root/.composer/vendor/bin" > /etc/environment
-RUN echo "export PATH=\$PATH:/root/.composer/vendor/bin" >> /etc/profile
+RUN echo "update env" \
+    && echo "export PATH=\$PATH:/root/.composer/vendor/bin" >> /root/.bashrc \
+    && echo "export PATH=\$PATH:/root/.composer/vendor/bin" >> /root/.profile \
+    && echo "export PATH=\$PATH:/root/.composer/vendor/bin" >> /etc/profile 
 
 # support zh-cn
 ENV LANG C.UTF-8
