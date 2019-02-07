@@ -8,20 +8,24 @@
 # Command format: Instruction [arguments / command ] ..
 
 # Base image to use, this nust be set as the first line
-FROM php:7.0-cli
+FROM php:7.0-cli-stretch
 
 # Maintainer: docker_user <docker_user at email.com> (@docker_user)
 MAINTAINER zengyu 284141050@qq.com
 
 #
 
-RUN echo "deb http://deb.debian.org/debian stretch main" >/etc/apt/sources.list \
-    && echo "deb http://security.debian.org/debian-security stretch/updates main" >>/etc/apt/sources.list \
-    && echo "deb http://deb.debian.org/debian stretch-updates main" >>/etc/apt/sources.list \
-    && echo "deb http://mirrors.aliyun.com/debian stretch main non-free contrib" >>/etc/apt/sources.list \
-    && echo "deb-src http://mirrors.aliyun.com/debian stretch main non-free contrib" >>/etc/apt/sources.list \
-    && echo "deb http://mirrors.aliyun.com/debian stretch-updates main non-free contrib" >>/etc/apt/sources.list \
-    && echo "deb-src http://mirrors.aliyun.com/debian stretch-updates main non-free contrib" >>/etc/apt/sources.list \
+RUN echo "change apt source" \
+    && echo "deb http://ftp.debian.org/debian stretch main contrib non-free" >/etc/apt/sources.list \
+    && echo "deb http://ftp.debian.org/debian stretch-updates main contrib non-free" >>/etc/apt/sources.list \
+    && echo "deb http://security.debian.org stretch/updates main contrib non-free" >>/etc/apt/sources.list \
+#    && echo "deb http://deb.debian.org/debian stretch main" >/etc/apt/sources.list \
+#    && echo "deb http://security.debian.org/debian-security stretch/updates main" >>/etc/apt/sources.list \
+#    && echo "deb http://deb.debian.org/debian stretch-updates main" >>/etc/apt/sources.list \
+#    && echo "deb http://mirrors.aliyun.com/debian stretch main non-free contrib" >>/etc/apt/sources.list \
+#    && echo "deb-src http://mirrors.aliyun.com/debian stretch main non-free contrib" >>/etc/apt/sources.list \
+#   && echo "deb http://mirrors.aliyun.com/debian stretch-updates main non-free contrib" >>/etc/apt/sources.list \
+#    && echo "deb-src http://mirrors.aliyun.com/debian stretch-updates main non-free contrib" >>/etc/apt/sources.list \
     && apt-get update \
     && apt-get install -y sudo \ 
     && apt-get install -y unzip \ 
