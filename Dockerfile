@@ -80,7 +80,7 @@ RUN composer global require 'codeception/codeception' \
     && composer global require 'friendsofphp/php-cs-fixer'
 
 
-
+USER root
 
 # Commands when creating a new container
 CMD ["php","-a"]
