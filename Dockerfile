@@ -42,9 +42,13 @@ RUN php /tmp/extension/ExtInstaller.php -n apcu
 # swoole
 RUN php /tmp/extension/ExtInstaller.php -n swoole
 
+# support zh-cn
+ENV LANG C.UTF-8
+
 # add a default user
 RUN useradd debian  -s /bin/bash -m -k /etc/skel \
     && echo "debian  ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 
 # Commands when creating a new container
 CMD ["php","-a"]
