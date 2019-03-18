@@ -49,6 +49,5 @@ ENV LANG C.UTF-8
 RUN useradd debian  -s /bin/bash -m -k /etc/skel \
     && echo "debian  ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-
 # Commands when creating a new container
 CMD ["php","-a"]
