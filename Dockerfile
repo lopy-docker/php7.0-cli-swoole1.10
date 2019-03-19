@@ -23,10 +23,7 @@ RUN echo "deb http://deb.debian.org/debian stretch main" >/etc/apt/sources.list 
     && echo "deb http://mirrors.aliyun.com/debian stretch-updates main non-free contrib" >>/etc/apt/sources.list \
     && echo "deb-src http://mirrors.aliyun.com/debian stretch-updates main non-free contrib" >>/etc/apt/sources.list \
     && apt-get update \
-    && apt-get install -y sudo \ 
-    && apt-get install -y unzip unrar apt-utils \ 
-    #&& apt-get install -y unrar \ 
-    #&& apt-get install -y apt-utils \ 
+    && apt-get install -y sudo unzip unrar apt-utils procps inetutils-ping \ 
     && apt-get clean && apt-get autoclean \
     && ls /var/cache/apt/archives
 
